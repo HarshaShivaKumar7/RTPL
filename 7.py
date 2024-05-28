@@ -7,15 +7,17 @@ import matplotlib.pyplot as plt
 from sklearn.preprocessing import LabelEncoder
 
 def generate_faculty_data(num_rows=100000):
+    np.random.seed(0)
+    experience = np.random.randint(1,21,num_rows)
     data = {
-        'Experience': np.arange(1, num_rows + 1),
-        'Designation': ['Professor' if x > 20 else 'Associate Professor' if x > 15 else 'Assistant Professor' if x > 5 else 'Lecturer' for x in range(1, num_rows + 1)],
-        'Salary': [50000 + x * 1000 for x in range(1, num_rows + 1)],
-        'Publications': [2 * x for x in range(1, num_rows + 1)],
-        'Book Chapters': [x // 10 for x in range(1, num_rows + 1)],
-        'Consultancy Work': [x * 100 for x in range(1, num_rows + 1)],
-        'Funds Received': [x * 500 for x in range(1, num_rows + 1)],
-        'Professional Membership': [x % 10 == 0 for x in range(1, num_rows + 1)]
+        'Experience': experience,
+        'Designation': ['Professor' if x > 20 else 'Associate Professor' if x > 15 else 'Assistant Professor' if x > 5 else 'Lecturer' for x in experience],
+        'Salary': [50000 + x * 1000 for x in experience],
+        'Publications': [2 * x for x in experience],
+        'Book Chapters': [x // 10 for x in experience],
+        'Consultancy Work': [x * 100 for x in experience],
+        'Funds Received': [x * 500 for x in experience],
+        'Professional Membership': [x % 10 == 0 for x in experience]
     }
     df = pd.DataFrame(data)
     df.to_csv('faculty_dataset.csv', index=False)
